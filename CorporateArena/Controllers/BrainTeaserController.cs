@@ -26,8 +26,8 @@ namespace CorporateArena.Presentation
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        [Authorize]
-        [AuthorizePermission(Permissions = Permission.CreateBrainTeaser)]
+        //[Authorize]
+        //[AuthorizePermission(Permissions = Permission.CreateBrainTeaser)]
         [HttpPost("CreateBrainTeaser")]
         public async Task<IActionResult> CreateBrainTeaser(BrainTeaser data)
         {
@@ -40,8 +40,8 @@ namespace CorporateArena.Presentation
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        [Authorize]
-        [AuthorizePermission(Permissions = Permission.ReadBrainTeaser)]
+        //[Authorize]
+        //[AuthorizePermission(Permissions = Permission.ReadBrainTeaser)]
         [HttpGet("GetBrainTeaserAndAnswer/{ID}")]
         public async Task<IActionResult> GetBrainTeaserAndAnswer(int ID)
         {
@@ -54,7 +54,7 @@ namespace CorporateArena.Presentation
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        [Authorize]
+        //[Authorize]
         [HttpPost("AnswerBrainTeaser")]
         public async Task<IActionResult> AnswerBrainTeaser(BrainTeaserAnswer data)
         {
@@ -67,8 +67,8 @@ namespace CorporateArena.Presentation
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        [Authorize]
-        [AuthorizePermission(Permissions = Permission.UpdateBrainTeaser)]
+        //[Authorize]
+        //[AuthorizePermission(Permissions = Permission.UpdateBrainTeaser)]
         [HttpPost("UpdateBrainTeaser")]
         public async Task<IActionResult> UpdateBrainTeaser(BrainTeaser data)
         {
@@ -81,8 +81,8 @@ namespace CorporateArena.Presentation
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        [Authorize]
-        [AuthorizePermission(Permissions = Permission.DeleteArticle)]
+        //[Authorize]
+        //[AuthorizePermission(Permissions = Permission.DeleteArticle)]
         [HttpDelete("DeleteBrainTeaser/{userID}/{ID}")]
         public async Task<IActionResult> DeleteBrainTeaser(int userID, int ID)
         {

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CorporateArena.Domain;
 using CorporateArena.Infrastructure;
 using CorporateArena.Presentation;
+using CorporateArena.Presentation.Core.SetupFiles;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -56,16 +57,18 @@ namespace CorporateArena
                         Scheme = "bearer" //The name of the HTTP Authorization scheme to be used in the Authorization header. In this case "bearer".
                     });
 
-                opt.AddSecurityRequirement(new OpenApiSecurityRequirement{
-                     {
-                        new OpenApiSecurityScheme{
-                            Reference = new OpenApiReference{
-                            Id = "Bearer", //The name of the previously defined security scheme.
-                            Type = ReferenceType.SecurityScheme
-                            }
-                        },new List<string>()
-                    }
-                });
+                //opt.AddSecurityRequirement(new OpenApiSecurityRequirement{
+                //     {
+                //        new OpenApiSecurityScheme{
+                //            Reference = new OpenApiReference{
+                //            Id = "Bearer", //The name of the previously defined security scheme.
+                //            Type = ReferenceType.SecurityScheme
+                //            }
+                //        },new List<string>()
+                //    }
+                //});
+
+                opt.OperationFilter<AuthResponsesOperationFilter>();
 
             });
                 //   services.Add
