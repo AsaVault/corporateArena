@@ -245,7 +245,7 @@ namespace CorporateArena.Domain
         {
             var status = true;
 
-            if (data.UserName == null || data.FirstName == null || data.FirstName == null || data.PhoneNumber == null)
+            if (data.UserName == null || data.FirstName == null || data.LastName == null || data.PhoneNumber == null)
                 status = false;
 
             return status;

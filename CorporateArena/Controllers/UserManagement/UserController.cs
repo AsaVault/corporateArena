@@ -28,8 +28,8 @@ namespace CorporateArena.Presentation
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        [Authorize]
-        [AuthorizePermission(Permissions = Permission.CreateUser)]
+        //[Authorize]
+        //[AuthorizePermission(Permissions = Permission.CreateUser)]
         [HttpPost("RegisterNewUser")]
         public async Task<IActionResult> RegisterNewUser(User data)
         {
@@ -83,7 +83,7 @@ namespace CorporateArena.Presentation
         /// </summary>
         /// <returns></returns>
 
-        [Authorize]
+        //[Authorize]
         [AuthorizePermission(Permissions = Permission.ReadUser)]
         [HttpGet("GetAllUsers")]
         public async Task<IActionResult> GetAllUsers()
@@ -98,7 +98,7 @@ namespace CorporateArena.Presentation
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        [Authorize]
+        //[Authorize]
         [AuthorizePermission(Permissions = Permission.ReadUser)]
         [HttpGet("GetUserByID/{ID}")]
         public async Task<IActionResult> GetUserByID(int ID)
@@ -111,7 +111,7 @@ namespace CorporateArena.Presentation
         /// 
         /// </summary>
         /// <returns></returns>
-        [Authorize]
+        //[Authorize]
         [AuthorizePermission(Permissions = Permission.ReadUser)]
         [HttpGet("GetAllUserRoles")]
         public async Task<IActionResult> GetAllUserRoles()
@@ -127,7 +127,7 @@ namespace CorporateArena.Presentation
         /// <param name="roleID"></param>
         /// <param name="userID"></param>
         /// <returns></returns>
-        [Authorize]
+        //[Authorize]
         [AuthorizePermission(Permissions = Permission.AssignRoleToUser)]
         [HttpPost("AssignRoleToUser/{roleID}/{userID}")]
         public async Task<IActionResult> AssignRoleToUser(int roleID, int userID)

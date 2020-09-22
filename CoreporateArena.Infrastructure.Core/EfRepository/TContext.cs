@@ -486,8 +486,19 @@ namespace CorporateArena.Infrastructure
                     IsActive=true,
                     ID=1,
                     Password="test"
-                }    
-                
+                }, new User
+                {
+                    DateCreated = DateTime.Now,
+                    RoleID = 1,
+                    Email = "me@asavault.com",
+                    FirstName = "Mutiu",
+                    LastName = "Adepoju",
+                    UserName = "admin",
+                    IsActive = true,
+                    ID = 2,
+                    Password = "Password@1"
+                }
+
             );
             modelBuilder.Entity<UserRole>().HasData(
                 new UserRole
