@@ -18,6 +18,8 @@ namespace CorporateArena.Domain
         Task<ArticleComment> getSingleCommentAsync(int userID, int articleID, int commentID);
 
         Task<Article> getAsync(int ID);
+        Task<Article> getUnappproveAsync(int ID);
+        Task updateApproveAsync(Article data);
 
         Task<int> insertAsync(Article data);
         

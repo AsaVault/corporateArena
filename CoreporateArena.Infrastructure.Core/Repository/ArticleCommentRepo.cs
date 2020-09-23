@@ -104,7 +104,7 @@ namespace CorporateArena.Infrastructure
                     Title=data.Title,
                     CommentLikesCount=0
                 };
-
+                // This line is not updating
                 await _context.ArticleComments.AddAsync(comment);
                 await _context.SaveChangesAsync();
                 return comment.ID;

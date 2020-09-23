@@ -62,8 +62,6 @@ namespace CorporateArena.Infrastructure
                 var comment = await _context.ArticleComments.Where(x => x.ID == commentID && x.ArticleID == articleID
                 && x.UserCreated==userID).SingleAsync();
 
-                
-
                 return comment;
             }
             catch (Exception ex)
@@ -77,9 +75,25 @@ namespace CorporateArena.Infrastructure
             try
             {
                 var article = await _context.Articles.Where(x => x.ID == ID && x.isApproved == true).SingleOrDefaultAsync();
+                //var article = await _context.Articles.Where(x => x.ID == ID).SingleOrDefaultAsync();
                 return article;
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        // GetUnApprove Article
+        public async Task<Article> getUnappproveAsync(int ID)
+        {
+            try
+            {
+                //var article = await _context.Articles.Where(x => x.ID == ID && x.isApproved == true).SingleOrDefaultAsync();
+                var article = await _context.Articles.Where(x => x.ID == ID && x.isApproved ==false).SingleOrDefaultAsync();
+                return article;
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -132,6 +146,24 @@ namespace CorporateArena.Infrastructure
                 await _context.SaveChangesAsync();
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        //Update Approve Async
+        public async Task updateApproveAsync(Article data)
+        {
+            try
+            {
+                var article = await _context.Articles.Where(x => x.ID == data.ID && x.isApproved == false).SingleOrDefaultAsync();
+
+                article.isApproved = data.isApproved;
+
+                _context.Articles.Update(article);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

@@ -65,6 +65,21 @@ namespace CorporateArena.Presentation
             return Ok(result);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        //[Authorize]
+        //[AuthorizePermission(Permissions = Permission.LikeArticle)]
+        [HttpPost("ApproveArticle")]
+        public async Task<IActionResult> ApproveArticle(ArticleLikeViewModel data)
+        {
+            var result = await _service.ApproveArticleAsync(data.UserID, data.ArticleID);
+            return Ok(result);
+        }
+
         /// <summary>
         /// 
         /// </summary>
