@@ -95,9 +95,7 @@ namespace CorporateArena.Domain
 
             await _repo.deleteAsync(ID);
 
-
             return new SaveResponse { status = true, Result = "Article successfully deleted" };
-
         }
 
 
@@ -106,11 +104,6 @@ namespace CorporateArena.Domain
         {
             var article = await _repo.getUnappproveAsync(articleID);
 
-            // check if the userid and articleid exist in articleLike
-
-            //var like = await _alRepo.getAsync(userID, articleID);
-
-            // Increase articlelikeCount and save articleLike, if it hasn't been liked before
             if (article != null && userID == 1 || userID == 2)
             {
                 article.isApproved = true;
