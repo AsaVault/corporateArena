@@ -29,6 +29,12 @@ namespace CorporateArena.Domain
             return trafficUpdate;
         }
 
+        public async Task<List<TrafficUpdate>> getAllAsync()
+        {
+            var result = await _uRepo.getAllAsync();
+            return result;
+        }
+
         public async Task<SaveResponse> SaveTrafficUpdateAsync(TrafficUpdate data)
         {
             int TID = await _uRepo.insertAsync(data);

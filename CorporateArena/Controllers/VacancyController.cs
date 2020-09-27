@@ -39,6 +39,17 @@ namespace CorporateArena.Presentation.Core.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetAllVacancies")]
+        public async Task<IActionResult> GetAllVacancies()
+        {
+            var result = await _service.GetAllVacanciesAsync();
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
         //[Authorize]

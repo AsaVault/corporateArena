@@ -40,6 +40,11 @@ namespace CorporateArena.Domain
             return new SaveResponse { ID = AID, status = true, Result = "Article successfully created" };
         }
 
+        public async Task<List<Article>> getAllAsync()
+        {
+            var result = await _repo.getAllAsync();
+            return result;
+        }
 
         public async Task<SaveResponse> SubmitCommentAsync(ArticleComment data)
         {

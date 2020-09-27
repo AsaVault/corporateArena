@@ -60,6 +60,7 @@ namespace CorporateArena.Infrastructure
             catch(Exception ex)
             {
                 like = null;
+                throw ex;
             }
             return like;
         }

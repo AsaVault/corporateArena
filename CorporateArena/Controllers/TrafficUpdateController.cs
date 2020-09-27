@@ -39,6 +39,19 @@ namespace CorporateArena.Presentation
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [AuthorizePermission(Permissions = Permission.ReadTrafficUpdate)]
+        [HttpGet("GetAllTrafficUpdates")]
+        public async Task<IActionResult> GetAllTrafficUpdates()
+        {
+            var result = await _service.getAllAsync();
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
         [Authorize]

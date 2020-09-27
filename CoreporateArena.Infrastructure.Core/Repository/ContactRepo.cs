@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,7 +39,7 @@ namespace CorporateArena.Infrastructure
         {
             try
             {
-                var contacts = await _context.Contacts.ToListAsync();
+                var contacts = await _context.Contacts.OrderByDescending(x=>x.DateCreated).ToListAsync();
                 return contacts;
             }
             catch (Exception ex)

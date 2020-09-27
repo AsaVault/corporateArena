@@ -41,5 +41,16 @@ namespace CorporateArena.Presentation.Core.Controllers
            await _sender.SendUserMessage(email);
             return Ok(result);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetAllContacts")]
+        public async Task<IActionResult> GetAllContacts()
+        {
+            var result = await _repo.getAllAsync();
+            return Ok(result);
+        }
     }
 }

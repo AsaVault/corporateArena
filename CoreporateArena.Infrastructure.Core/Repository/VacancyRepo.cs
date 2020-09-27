@@ -37,7 +37,7 @@ namespace CorporateArena.Infrastructure
         {
             try
             {
-                var vacancies = await _context.Vacancies.ToListAsync();
+                var vacancies = await _context.Vacancies.OrderByDescending(x=>x.DateCreated).ToListAsync();
                 return vacancies;
             }
             catch(Exception ex)

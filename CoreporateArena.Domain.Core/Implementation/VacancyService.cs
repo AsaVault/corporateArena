@@ -34,7 +34,7 @@ namespace CorporateArena.Domain
             return vacancies;
         }
 
-        public async Task<Vacancy> GetVacancyByIDAsync(int ID)
+        public  Task<Vacancy> GetVacancyByIDAsync(int ID)
         {
             throw new NotImplementedException();
             //var vacancy = await _vRepo.getAsync(ID);

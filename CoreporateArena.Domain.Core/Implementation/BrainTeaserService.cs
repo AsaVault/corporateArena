@@ -21,13 +21,16 @@ namespace CorporateArena.Domain
 
         public async Task<SaveResponse> SaveBrainTeaserAsync(BrainTeaser data)
         {
-            
-
             int BRID = await _repo.insertAsync(data);
             return new SaveResponse { ID = BRID, status = true, Result = "Brain Teaser successfully created" };
-
-
         }
+
+        public async Task<List<BrainTeaser>> getAllAsync()
+        {
+            var result = await _repo.getAllAsync();
+            return result;
+        }
+
 
         public async Task<SaveResponse> SubmitAnswerAsync(BrainTeaserAnswer data)
         {

@@ -16,6 +16,7 @@ namespace CorporateArena.Infrastructure
             _context = context;
         }
 
+        
         public Task deleteAllByIDAsync(int ID)
         {
             throw new NotImplementedException();
@@ -40,7 +41,7 @@ namespace CorporateArena.Infrastructure
         {
             try
             {
-                var articles = await _context.Articles.ToListAsync();
+                var articles = await _context.Articles.OrderByDescending(x=>x.DateCreated).ToListAsync();
                 return articles;
             }
             catch (Exception ex)

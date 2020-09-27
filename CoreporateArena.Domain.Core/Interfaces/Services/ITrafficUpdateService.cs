@@ -14,6 +14,7 @@ namespace CorporateArena.Domain
         Task<TrafficUpdate> GetTrafficUpdateWithComments(int ID);
 
         Task<SaveResponse> DeleteArticleAsync(int ID, int userID);
+        Task<List<TrafficUpdate>> getAllAsync();
 
 
 

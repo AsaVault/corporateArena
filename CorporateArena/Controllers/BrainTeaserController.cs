@@ -38,6 +38,17 @@ namespace CorporateArena.Presentation
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetAllBrainTeasers")]
+        public async Task<IActionResult> GetAllBrainTeasers()
+        {
+            var result = await _service.getAllAsync();
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
         //[Authorize]

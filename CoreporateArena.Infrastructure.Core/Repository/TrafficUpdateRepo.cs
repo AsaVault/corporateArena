@@ -38,9 +38,17 @@ namespace CorporateArena.Infrastructure
 
         }
 
-        public Task<List<TrafficUpdate>> getAllAsync()
+        public async Task<List<TrafficUpdate>> getAllAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var trafficUpdates = await _context.TrafficUpdates.OrderByDescending(x => x.DateCreated).ToListAsync();
+                return trafficUpdates;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public Task<List<TrafficUpdate>> getAllByIDAsync(int ID)

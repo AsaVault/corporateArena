@@ -9,6 +9,7 @@ namespace CorporateArena.Domain
     {
         Task<SaveResponse> SaveArticleAsync(Article data);
         Task<SaveResponse> SubmitCommentAsync(ArticleComment data);
+        Task<List<Article>> getAllAsync();
         Task<Article> GetArticleWithCommentsAsync(int ID);
         Task<SaveResponse> UpdateArticleAsync(Article data);
         Task<SaveResponse> DeleteArticleAsync(int ID, int userID);

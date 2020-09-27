@@ -41,9 +41,8 @@ namespace CorporateArena.Infrastructure
         {
             try
             {
-                var bts = await _context.BrainTeasers.ToListAsync();
+                var bts = await _context.BrainTeasers.OrderByDescending(x=>x.DateCreated).ToListAsync();
                 return bts;
-
             }
             catch (Exception ex)
             {

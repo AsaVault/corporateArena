@@ -42,6 +42,18 @@ namespace CorporateArena.Presentation
         /// <param name="ID"></param>
         /// <returns></returns>
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetAllArticles")]
+        public async Task<IActionResult> GetAllArticles()
+        {
+            var result = await _service.getAllAsync();
+            return Ok(result);
+        }
+
         //[Authorize]
         //[AuthorizePermission(Permissions = Permission.ReadArticle)]
         [HttpGet("GetArticle/{ID}")]
