@@ -16,7 +16,7 @@ namespace CorporateArena.Domain
         Task<int> insertAsync(Vacancy data);
         
         Task updateAsync(Vacancy data);
-
+        Task<Vacancy> getAsync(int ID);
         Task<List<Vacancy>> getByModeAsync(string mode);
 
         Task<List<Vacancy>> getByIndustryAsync(string industry);

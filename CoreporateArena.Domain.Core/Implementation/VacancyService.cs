@@ -34,11 +34,11 @@ namespace CorporateArena.Domain
             return vacancies;
         }
 
-        public  Task<Vacancy> GetVacancyByIDAsync(int ID)
+        public async Task<Vacancy> GetVacancyByIDAsync(int ID)
         {
-            throw new NotImplementedException();
-            //var vacancy = await _vRepo.getAsync(ID);
-            //return vacancy;
+            // throw new NotImplementedException(
+            var vacancy = await _vRepo.getAsync(ID);
+            return vacancy;
         }
 
         public async Task<SaveResponse> SaveVacancyAsync(Vacancy data)
