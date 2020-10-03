@@ -41,7 +41,7 @@ namespace CorporateArena.Infrastructure
         {
             try
             {
-                var articles = await _context.Articles.OrderByDescending(x=>x.DateCreated).ToListAsync();
+                var articles = await _context.Articles.Include(x=>x.Comments).Where(x=>x.isApproved == true).OrderByDescending(x=>x.DateCreated).ToListAsync();
                 return articles;
             }
             catch (Exception ex)

@@ -74,7 +74,8 @@ namespace CorporateArena.Infrastructure
                 {
                     DateCreated = DateTime.Now,
                     Message = data.Message,
-                    Username = data.Username
+                    Username = data.Username,
+                    Email = data.Email
                 };
                 await _context.Contacts.AddAsync(contact);
                 await _context.SaveChangesAsync();
