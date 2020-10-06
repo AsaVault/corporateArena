@@ -70,7 +70,7 @@ namespace CorporateArena.Presentation
         /// <param name="data"></param>
         /// <returns></returns>
         //[Authorize]
-        //[HttpPost("CommentOnTrafficUpdate")]
+        [HttpPost("CommentOnTrafficUpdate")]
         public async Task<IActionResult> CommentOnTrafficUpdate(TrafficComment data)
         {
             var result = await _service.SaveTrafficUpdateCommentAsync(data);
