@@ -27,8 +27,8 @@ namespace CorporateArena.Presentation
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        [Authorize]
-        [AuthorizePermission(Permissions = Permission.CreateTrafficUpdate)]
+        ///[Authorize]
+        //[AuthorizePermission(Permissions = Permission.CreateTrafficUpdate)]
         [HttpPost("SaveTrafficUpdate")]
         public async Task<IActionResult> SaveTrafficUpdate(TrafficUpdate data)
         {
@@ -40,8 +40,8 @@ namespace CorporateArena.Presentation
         /// 
         /// </summary>
         /// <returns></returns>
-        [Authorize]
-        [AuthorizePermission(Permissions = Permission.ReadTrafficUpdate)]
+        //[Authorize]
+        //[AuthorizePermission(Permissions = Permission.ReadTrafficUpdate)]
         [HttpGet("GetAllTrafficUpdates")]
         public async Task<IActionResult> GetAllTrafficUpdates()
         {
@@ -54,8 +54,8 @@ namespace CorporateArena.Presentation
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        [Authorize]
-        [AuthorizePermission(Permissions = Permission.UpdateTrafficUpdate)]
+        //[Authorize]
+        //[AuthorizePermission(Permissions = Permission.UpdateTrafficUpdate)]
         [HttpGet("GetTrafficUpdate/{ID}")]
         public async Task<IActionResult> GetTrafficUpdate(int ID)
         {
@@ -69,8 +69,8 @@ namespace CorporateArena.Presentation
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        [Authorize]
-        [HttpPost("CommentOnTrafficUpdate")]
+        //[Authorize]
+        //[HttpPost("CommentOnTrafficUpdate")]
         public async Task<IActionResult> CommentOnTrafficUpdate(TrafficComment data)
         {
             var result = await _service.SaveTrafficUpdateCommentAsync(data);
