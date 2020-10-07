@@ -60,7 +60,7 @@ namespace CorporateArena.Infrastructure
         {
             try
             {
-                var trafficUpdate = await _context.TrafficUpdates.FindAsync(ID);
+                var trafficUpdate = await _context.TrafficUpdates.Include(x => x.TrafficUpdateComments).FirstOrDefaultAsync(x => x.ID == ID);
                 return trafficUpdate;
             }
             catch(Exception ex)
