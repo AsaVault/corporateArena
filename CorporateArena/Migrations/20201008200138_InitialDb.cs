@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CorporateArena.Presentation.Core.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,7 +37,10 @@ namespace CorporateArena.Presentation.Core.Migrations
                     UserCreated = table.Column<int>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: false),
                     DateModified = table.Column<DateTime>(nullable: false),
-                    CorrectAnswer = table.Column<string>(nullable: true)
+                    CorrectAnswer = table.Column<string>(nullable: true),
+                    Gift = table.Column<string>(nullable: true),
+                    isApproved = table.Column<bool>(nullable: false),
+                    isDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -203,6 +206,7 @@ namespace CorporateArena.Presentation.Core.Migrations
                     DateCreated = table.Column<DateTime>(nullable: false),
                     UserCreated = table.Column<int>(nullable: false),
                     Answer = table.Column<string>(nullable: true),
+                    isApproved = table.Column<bool>(nullable: false),
                     BrainTeaserID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -210,6 +214,29 @@ namespace CorporateArena.Presentation.Core.Migrations
                     table.PrimaryKey("PK_BrainTeaserAnswers", x => x.ID);
                     table.ForeignKey(
                         name: "FK_BrainTeaserAnswers_BrainTeasers_BrainTeaserID",
+                        column: x => x.BrainTeaserID,
+                        principalTable: "BrainTeasers",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BrainTeaserWinners",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    UserCreated = table.Column<int>(nullable: false),
+                    Answer = table.Column<string>(nullable: true),
+                    isDisplayed = table.Column<bool>(nullable: false),
+                    BrainTeaserID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BrainTeaserWinners", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_BrainTeaserWinners_BrainTeasers_BrainTeaserID",
                         column: x => x.BrainTeaserID,
                         principalTable: "BrainTeasers",
                         principalColumn: "ID",
@@ -401,19 +428,19 @@ namespace CorporateArena.Presentation.Core.Migrations
                 columns: new[] { "ID", "DateCreated", "DateModified", "DisplayName", "Name", "UserCreated", "UserModified" },
                 values: new object[,]
                 {
-                    { 2, new DateTime(2020, 9, 7, 15, 50, 7, 825, DateTimeKind.Local).AddTicks(8928), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Basic", "Basic", 1, null },
-                    { 1, new DateTime(2020, 9, 7, 15, 50, 7, 823, DateTimeKind.Local).AddTicks(3600), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SuperUser", "SuperUser", 1, null }
+                    { 2, new DateTime(2020, 10, 8, 21, 1, 36, 630, DateTimeKind.Local).AddTicks(1652), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Basic", "Basic", 1, null },
+                    { 1, new DateTime(2020, 10, 8, 21, 1, 36, 627, DateTimeKind.Local).AddTicks(5195), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SuperUser", "SuperUser", 1, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "ID", "DateCreated", "DateModified", "RoleID", "UserCreated", "UserID", "UserModified" },
-                values: new object[] { 1, new DateTime(2020, 9, 7, 15, 50, 7, 826, DateTimeKind.Local).AddTicks(8398), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, null });
+                values: new object[] { 1, new DateTime(2020, 10, 8, 21, 1, 36, 631, DateTimeKind.Local).AddTicks(6955), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, 1, null });
 
             migrationBuilder.InsertData(
                 table: "AppUsers",
                 columns: new[] { "ID", "DateCreated", "DateModified", "Email", "FirstName", "IsActive", "IsDeleted", "LastName", "OtherName", "Password", "PhoneNumber", "RoleID", "Token", "UserCreated", "UserModified", "UserName" },
-                values: new object[] { 1, new DateTime(2020, 9, 7, 15, 50, 7, 826, DateTimeKind.Local).AddTicks(3660), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "tkolawole@Inspirecoders.com", "System", true, null, "User", null, "test", null, 1, null, null, null, "System Administrator" });
+                values: new object[] { 1, new DateTime(2020, 10, 8, 21, 1, 36, 630, DateTimeKind.Local).AddTicks(8291), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "tkolawole@Inspirecoders.com", "System", true, null, "User", null, "Password@1", null, 1, null, null, null, "admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppUsers_RoleID",
@@ -433,6 +460,11 @@ namespace CorporateArena.Presentation.Core.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_BrainTeaserAnswers_BrainTeaserID",
                 table: "BrainTeaserAnswers",
+                column: "BrainTeaserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BrainTeaserWinners_BrainTeaserID",
+                table: "BrainTeaserWinners",
                 column: "BrainTeaserID");
 
             migrationBuilder.CreateIndex(
@@ -461,6 +493,9 @@ namespace CorporateArena.Presentation.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "BrainTeaserAnswers");
+
+            migrationBuilder.DropTable(
+                name: "BrainTeaserWinners");
 
             migrationBuilder.DropTable(
                 name: "CommentLikes");

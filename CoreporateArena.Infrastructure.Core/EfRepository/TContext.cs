@@ -19,6 +19,7 @@ namespace CorporateArena.Infrastructure
         public DbSet<RolePrivilege> RolePrivileges { get; set; }
         public DbSet<BrainTeaser> BrainTeasers { get; set; }
         public DbSet<BrainTeaserAnswer> BrainTeaserAnswers { get; set; }
+        public DbSet<BrainTeaserWinner> BrainTeaserWinners { get; set; }
         public DbSet<Vacancy> Vacancies { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<ArticleComment> ArticleComments { get; set; }
@@ -477,27 +478,28 @@ namespace CorporateArena.Infrastructure
             modelBuilder.Entity<User>().HasData(
                 new User
                 {
-                    DateCreated=DateTime.Now,
-                    RoleID=1,
-                    Email="tkolawole@Inspirecoders.com",
-                    FirstName="System",
-                    LastName="User",
-                    UserName="System Administrator",
-                    IsActive=true,
-                    ID=1,
-                    Password="test"
-                }, new User
-                {
                     DateCreated = DateTime.Now,
                     RoleID = 1,
-                    Email = "me@asavault.com",
-                    FirstName = "Mutiu",
-                    LastName = "Adepoju",
+                    Email = "tkolawole@Inspirecoders.com",
+                    FirstName = "System",
+                    LastName = "User",
+                    //UserName = "System Administrator",
                     UserName = "admin",
                     IsActive = true,
-                    ID = 2,
+                    ID = 1,
                     Password = "Password@1"
-                }
+                } //, new User
+            //    {
+            //        DateCreated = DateTime.Now,
+            //        RoleID = 1,
+            //        Email = "me@asavault.com",
+            //        FirstName = "Mutiu",
+            //        LastName = "Adepoju",
+            //        UserName = "admin",
+            //        IsActive = true,
+            //        //ID = 2,
+            //        Password = "Password@1"
+            //    }
 
             );
             modelBuilder.Entity<UserRole>().HasData(

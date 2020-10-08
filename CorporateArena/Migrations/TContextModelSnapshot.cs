@@ -128,11 +128,20 @@ namespace CorporateArena.Presentation.Core.Migrations
                     b.Property<DateTime>("DateModified")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Gift")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Riddle")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserCreated")
                         .HasColumnType("int");
+
+                    b.Property<bool>("isApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
 
                     b.HasKey("ID");
 
@@ -158,11 +167,43 @@ namespace CorporateArena.Presentation.Core.Migrations
                     b.Property<int>("UserCreated")
                         .HasColumnType("int");
 
+                    b.Property<bool>("isApproved")
+                        .HasColumnType("bit");
+
                     b.HasKey("ID");
 
                     b.HasIndex("BrainTeaserID");
 
                     b.ToTable("BrainTeaserAnswers");
+                });
+
+            modelBuilder.Entity("CorporateArena.Domain.BrainTeaserWinner", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Answer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BrainTeaserID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserCreated")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isDisplayed")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("BrainTeaserID");
+
+                    b.ToTable("BrainTeaserWinners");
                 });
 
             modelBuilder.Entity("CorporateArena.Domain.CommentLike", b =>
@@ -519,7 +560,7 @@ namespace CorporateArena.Presentation.Core.Migrations
                         new
                         {
                             ID = 1,
-                            DateCreated = new DateTime(2020, 9, 7, 15, 50, 7, 823, DateTimeKind.Local).AddTicks(3600),
+                            DateCreated = new DateTime(2020, 10, 8, 21, 1, 36, 627, DateTimeKind.Local).AddTicks(5195),
                             DateModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DisplayName = "SuperUser",
                             Name = "SuperUser",
@@ -528,7 +569,7 @@ namespace CorporateArena.Presentation.Core.Migrations
                         new
                         {
                             ID = 2,
-                            DateCreated = new DateTime(2020, 9, 7, 15, 50, 7, 825, DateTimeKind.Local).AddTicks(8928),
+                            DateCreated = new DateTime(2020, 10, 8, 21, 1, 36, 630, DateTimeKind.Local).AddTicks(1652),
                             DateModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DisplayName = "Basic",
                             Name = "Basic",
@@ -884,15 +925,15 @@ namespace CorporateArena.Presentation.Core.Migrations
                         new
                         {
                             ID = 1,
-                            DateCreated = new DateTime(2020, 9, 7, 15, 50, 7, 826, DateTimeKind.Local).AddTicks(3660),
+                            DateCreated = new DateTime(2020, 10, 8, 21, 1, 36, 630, DateTimeKind.Local).AddTicks(8291),
                             DateModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "tkolawole@Inspirecoders.com",
                             FirstName = "System",
                             IsActive = true,
                             LastName = "User",
-                            Password = "test",
+                            Password = "Password@1",
                             RoleID = 1,
-                            UserName = "System Administrator"
+                            UserName = "admin"
                         });
                 });
 
@@ -929,7 +970,7 @@ namespace CorporateArena.Presentation.Core.Migrations
                         new
                         {
                             ID = 1,
-                            DateCreated = new DateTime(2020, 9, 7, 15, 50, 7, 826, DateTimeKind.Local).AddTicks(8398),
+                            DateCreated = new DateTime(2020, 10, 8, 21, 1, 36, 631, DateTimeKind.Local).AddTicks(6955),
                             DateModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RoleID = 1,
                             UserID = 1
@@ -1003,6 +1044,15 @@ namespace CorporateArena.Presentation.Core.Migrations
                 {
                     b.HasOne("CorporateArena.Domain.BrainTeaser", null)
                         .WithMany("BrainTeaserAnswers")
+                        .HasForeignKey("BrainTeaserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CorporateArena.Domain.BrainTeaserWinner", b =>
+                {
+                    b.HasOne("CorporateArena.Domain.BrainTeaser", null)
+                        .WithMany("BrainTeaserWinners")
                         .HasForeignKey("BrainTeaserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
