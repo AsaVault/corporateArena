@@ -39,9 +39,14 @@ namespace CorporateArena.Domain
 
             int AID = await _bRepo.insertAsync(data);
             return new SaveResponse { ID = AID, status = true, Result = "Answer successfully submitted" };
-
-
         }
+
+        public async Task<SaveResponse> SubmitWinnerAsync(BrainTeaserWinner data)
+        {
+            int WID = await _wRepo.insertAsync(data);
+            return new SaveResponse { ID = WID, status = true, Result = "Winner successfully submitted" };
+        }
+
         public async Task<BrainTeaser> GetBrainTeaserandAnswerAsync(int ID)
         {
             var bt = await _repo.getAsync(ID);
