@@ -120,11 +120,21 @@ namespace CorporateArena.Infrastructure.Core.Repository
 
         public async Task updateAsync(BrainTeaserWinner data)
         {
-            var bt = await _context.BrainTeaserWinners.FindAsync(data.ID);
-            bt.isDisplayed = false;
+            try
+            {
+                var bt = await _context.BrainTeaserWinners.FindAsync(data.ID);
+                if (data.isDisplayed)
+                    bt.isDisplayed = false;
 
-            _context.BrainTeaserWinners.Update(bt);
-            await _context.SaveChangesAsync();
+                _context.BrainTeaserWinners.Update(bt);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
     }
 }
