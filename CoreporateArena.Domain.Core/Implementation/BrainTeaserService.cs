@@ -41,12 +41,14 @@ namespace CorporateArena.Domain
             return new SaveResponse { ID = AID, status = true, Result = "Answer successfully submitted" };
         }
 
+        // This should be reviewed if it should be left or deleted...
         public async Task<SaveResponse> SubmitWinnerAsync(BrainTeaserWinner data)
         {
             int WID = await _wRepo.insertAsync(data);
             return new SaveResponse { ID = WID, status = true, Result = "Winner successfully submitted" };
         }
 
+        // Get Brain teaser with winner and answer list only for Admin
         public async Task<BrainTeaser> GetBrainTeaserandAnswerAsync(int ID)
         {
             var bt = await _repo.getAsync(ID);
@@ -59,6 +61,7 @@ namespace CorporateArena.Domain
             return bt;
         }
 
+        // Get Brain teaser with winner list only
         public async Task<BrainTeaser> GetBrainTeaserandWinnerAsync(int ID)
         {
             var bt = await _repo.getAsync(ID);
@@ -87,6 +90,30 @@ namespace CorporateArena.Domain
                 return new SaveResponse { status = true, Result = "Unable to approve brain teaser answer" };
             }
         }
+
+        // Display Brain Teaser Winner 
+        public async Task<SaveResponse> DisplayBrainTeaserWinnerAsync(int userID, int wId)
+        {
+            var bWinner = await _wRepo.getAsync(wId);
+
+            if (bWinner != null && userID == 1 || userID == 2)
+            {
+                if (bWinner.isDisplayed)
+                {
+                    await _wRepo.updateAsync(bWinner);
+
+                    return new SaveResponse { status = true, Result = "Brain teaser winner was undisplayed" };
+                }
+                await _wRepo.updateAsync(bWinner);
+
+                return new SaveResponse { status = true, Result = "Brain teaser winner was displayed" };
+            }
+            else
+            {
+                return new SaveResponse { status = true, Result = "Unable to approve brain teaser answer" };
+            }
+        }
+
 
         public async Task<SaveResponse> UpdateBrainTeaserAsync(BrainTeaser data)
         {
