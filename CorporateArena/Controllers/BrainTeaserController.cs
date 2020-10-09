@@ -68,8 +68,8 @@ namespace CorporateArena.Presentation
         /// <returns></returns>
         //[Authorize]
         //[AuthorizePermission(Permissions = Permission.ReadBrainTeaser)]
-        [HttpGet("GetBrainTeaserandWinner/{ID}")]
-        public async Task<IActionResult> GetBrainTeaserandWinner(int ID)
+        [HttpGet("GetBrainTeaserAndWinner/{ID}")]
+        public async Task<IActionResult> GetBrainTeaserAndWinner(int ID)
         {
             var result = await _service.GetBrainTeaserandWinnerAsync(ID);
             return Ok(result);

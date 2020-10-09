@@ -62,7 +62,7 @@ namespace CorporateArena.Domain
         }
 
         // Get Brain teaser with winner list only
-        public async Task<BrainTeaser> GetBrainTeaserandWinnerAsync(int ID)
+        public async Task<BrainTeaser> GetBrainTeaserAndWinnerAsync(int ID)
         {
             var bt = await _repo.getAsync(ID);
 
