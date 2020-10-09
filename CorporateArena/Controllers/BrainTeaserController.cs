@@ -71,7 +71,7 @@ namespace CorporateArena.Presentation
         [HttpGet("GetBrainTeaserAndWinner/{ID}")]
         public async Task<IActionResult> GetBrainTeaserAndWinner(int ID)
         {
-            var result = await _service.GetBrainTeaserandWinnerAsync(ID);
+            var result = await _service.GetBrainTeaserAndWinnerAsync(ID);
             return Ok(result);
         }
 
