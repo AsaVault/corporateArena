@@ -10,13 +10,14 @@ namespace CorporateArena.Domain
         private readonly IRepo<BrainTeaser> _repo;
         private readonly IUserService _uService;
         private readonly IRepo<BrainTeaserAnswer> _bRepo;
+        private readonly IRepo<BrainTeaserWinner> _wRepo;
 
-        public BrainTeaserService(IRepo<BrainTeaser> repo, IUserService uService, IRepo<BrainTeaserAnswer> bRepo)
+        public BrainTeaserService(IRepo<BrainTeaser> repo, IUserService uService, IRepo<BrainTeaserAnswer> bRepo, IRepo<BrainTeaserWinner> wRepo)
         {
             _repo = repo;
             _uService = uService;
             _bRepo = bRepo;
-            
+            _wRepo = wRepo;
         }
 
         public async Task<SaveResponse> SaveBrainTeaserAsync(BrainTeaser data)
@@ -46,7 +47,9 @@ namespace CorporateArena.Domain
             var bt = await _repo.getAsync(ID);
 
             var answers = await _bRepo.getAllByIDAsync(ID);
+            var winners = await _wRepo.getAllByIDAsync(ID);
             bt.BrainTeaserAnswers = answers;
+            bt.BrainTeaserWinners = winners;
 
             return bt;
         }
