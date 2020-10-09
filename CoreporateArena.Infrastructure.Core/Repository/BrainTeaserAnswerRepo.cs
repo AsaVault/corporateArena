@@ -98,8 +98,8 @@ namespace CorporateArena.Infrastructure
                 BrainTeaserAnswer bt = new BrainTeaserAnswer
                 {
                     DateCreated = DateTime.Now,
-                    Answer=data.Answer,
-                    BrainTeaserID=data.BrainTeaserID,
+                    Answer = data.Answer,
+                    BrainTeaserID = data.BrainTeaserID,
                     UserCreated = data.UserCreated
                 };
 
@@ -119,9 +119,32 @@ namespace CorporateArena.Infrastructure
             throw new NotImplementedException();
         }
 
-       public Task updateAsync(BrainTeaserAnswer data)
+        // Here we approve brain teaser answer and add to brain teaser winner
+        public async Task updateAsync(BrainTeaserAnswer data)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var bAnswer = await _context.BrainTeaserAnswers.FindAsync(data.ID);
+                if (data.isApproved == false) bAnswer.isApproved = true;
+
+                _context.BrainTeaserAnswers.Update(bAnswer);
+
+                var bWinner = new BrainTeaserWinner()
+                {
+                    DateCreated = DateTime.Now,
+                    UserCreated = bAnswer.UserCreated,
+                    Answer = bAnswer.Answer,
+                    isDisplayed = true,
+                    BrainTeaserID = bAnswer.BrainTeaserID
+                };
+                _context.BrainTeaserWinners.Add(bWinner);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

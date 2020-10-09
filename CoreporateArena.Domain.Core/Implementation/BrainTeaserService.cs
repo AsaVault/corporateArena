@@ -71,6 +71,23 @@ namespace CorporateArena.Domain
             return bt;
         }
 
+        // Approve Article 
+        public async Task<SaveResponse> ApproveBrainTeaserAnswerAsync(int userID, int wId)
+        {
+            var article = await _wRepo.getUnappproveAsync(wId);
+
+            if (article != null && userID == 1 || userID == 2)
+            {
+                article.isApproved = true;
+                await _repo.updateApproveAsync(article);
+                return new SaveResponse { status = true, Result = "Article was approved" };
+            }
+            else
+            {
+                return new SaveResponse { status = true, Result = "Unable to approve article" };
+            }
+        }
+
         public async Task<SaveResponse> UpdateBrainTeaserAsync(BrainTeaser data)
         {
             
