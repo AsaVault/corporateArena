@@ -93,6 +93,20 @@ namespace CorporateArena.Presentation
         /// <param name="data"></param>
         /// <returns></returns>
         //[Authorize]
+        [HttpPost("ApproveBrainTeaserAnswer")]
+        public async Task<IActionResult> ApproveBrainTeaserAnswer(BrainTeaserAnswer data)
+        {
+            var result = await _service.SubmitAnswerAsync(data);
+            return Ok(result);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        //[Authorize]
         //[AuthorizePermission(Permissions = Permission.UpdateBrainTeaser)]
         [HttpPost("UpdateBrainTeaser")]
         public async Task<IActionResult> UpdateBrainTeaser(BrainTeaser data)
