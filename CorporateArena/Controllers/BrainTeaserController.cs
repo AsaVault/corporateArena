@@ -63,6 +63,20 @@ namespace CorporateArena.Presentation
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        //[Authorize]
+        //[AuthorizePermission(Permissions = Permission.ReadBrainTeaser)]
+        [HttpGet("GetBrainTeaserandWinner/{ID}")]
+        public async Task<IActionResult> GetBrainTeaserandWinner(int ID)
+        {
+            var result = await _service.GetBrainTeaserandWinnerAsync(ID);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
         //[Authorize]
