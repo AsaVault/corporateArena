@@ -12,6 +12,7 @@ namespace CorporateArena.Domain
         Task<BrainTeaser> GetBrainTeaserandAnswerAsync(int ID);
         Task<BrainTeaser> GetBrainTeaserandWinnerAsync(int ID);
         Task<SaveResponse> ApproveBrainTeaserAnswerAsync(int userID, int wId);
+        Task<SaveResponse> DisplayBrainTeaserWinnerAsync(int userID, int wId);
         Task<SaveResponse> UpdateBrainTeaserAsync(BrainTeaser data);
         Task<SaveResponse> DeleteBrainTeaser(int ID,int userID);
         Task<List<BrainTeaser>> getAllAsync();
