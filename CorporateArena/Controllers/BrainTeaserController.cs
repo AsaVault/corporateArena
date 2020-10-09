@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CorporateArena.Domain;
 using CorporateArena.Infrastructure;
+using CorporateArena.Presentation.Core.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -94,12 +95,24 @@ namespace CorporateArena.Presentation
         /// <returns></returns>
         //[Authorize]
         [HttpPost("ApproveBrainTeaserAnswer")]
-        public async Task<IActionResult> ApproveBrainTeaserAnswer(BrainTeaserAnswer data)
+        public async Task<IActionResult> ApproveBrainTeaserAnswer(BrainTeaserViewModel data)
         {
-            var result = await _service.SubmitAnswerAsync(data);
+            var result = await _service.ApproveBrainTeaserAnswerAsync(data.UserID, data.BrainTeaserID);
             return Ok(result);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        //[Authorize]
+        [HttpPost("DisplayBrainTeaserWinner")]
+        public async Task<IActionResult> DisplayBrainTeaserWinner(BrainTeaserViewModel data)
+        {
+            var result = await _service.DisplayBrainTeaserWinnerAsync(data.UserID, data.BrainTeaserID);
+            return Ok(result);
+        }
 
         /// <summary>
         /// 
