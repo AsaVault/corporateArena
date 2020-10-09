@@ -124,18 +124,20 @@ namespace CorporateArena.Infrastructure
         {
             try
             {
-                var bAnswer = await _context.BrainTeaserAnswers.FindAsync(data.ID);
-                if (data.isApproved == false) bAnswer.isApproved = true;
+                //var bAnswer = await _context.BrainTeaserAnswers.FindAsync(data.ID);
+                //if (data.isApproved == false) bAnswer.isApproved = true;
+                // _context.BrainTeaserAnswers.Update(bAnswer);
+                if (data.isApproved == false) data.isApproved = true;
 
-                _context.BrainTeaserAnswers.Update(bAnswer);
+                _context.BrainTeaserAnswers.Update(data);
 
                 var bWinner = new BrainTeaserWinner()
                 {
-                    DateCreated = DateTime.Now,
-                    UserCreated = bAnswer.UserCreated,
-                    Answer = bAnswer.Answer,
+                    DateCreated = data.DateCreated,
+                    UserCreated = data.UserCreated,
+                    Answer = data.Answer,
                     isDisplayed = true,
-                    BrainTeaserID = bAnswer.BrainTeaserID
+                    BrainTeaserID = data.BrainTeaserID
                 };
                 _context.BrainTeaserWinners.Add(bWinner);
                 await _context.SaveChangesAsync();

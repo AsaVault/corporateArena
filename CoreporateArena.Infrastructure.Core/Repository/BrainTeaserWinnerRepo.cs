@@ -123,9 +123,15 @@ namespace CorporateArena.Infrastructure.Core.Repository
             try
             {
                 var bt = await _context.BrainTeaserWinners.FindAsync(data.ID);
-                if (data.isDisplayed)
-                    bt.isDisplayed = false;
-
+                if (bt.isDisplayed)
+                {
+                    bt.isDisplayed = !bt.isDisplayed;
+                }
+                else
+                {
+                    bt.isDisplayed = !bt.isDisplayed;
+                }
+                    
                 _context.BrainTeaserWinners.Update(bt);
                 await _context.SaveChangesAsync();
             }
