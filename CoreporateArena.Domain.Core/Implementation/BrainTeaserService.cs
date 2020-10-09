@@ -53,6 +53,19 @@ namespace CorporateArena.Domain
 
             return bt;
         }
+
+        public async Task<BrainTeaser> GetBrainTeaserandWinnerAsync(int ID)
+        {
+            var bt = await _repo.getAsync(ID);
+
+            //var answers = await _bRepo.getAllByIDAsync(ID);
+            var winners = await _wRepo.getAllByIDAsync(ID);
+            //bt.BrainTeaserAnswers = answers;
+            bt.BrainTeaserWinners = winners;
+
+            return bt;
+        }
+
         public async Task<SaveResponse> UpdateBrainTeaserAsync(BrainTeaser data)
         {
             
