@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CorporateArena.Domain;
 using CorporateArena.Infrastructure;
+using CorporateArena.Infrastructure.Core.Repository;
 using CorporateArena.Presentation;
 using CorporateArena.Presentation.Core.SetupFiles;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -127,6 +128,7 @@ namespace CorporateArena
             services.AddScoped<IRoleRepo, RoleRepo>();
             services.AddScoped<IRepo<BrainTeaser>, BrainTeaserRepo>();
             services.AddScoped<IRepo<BrainTeaserAnswer>, BrainTeaserAnswerRepo>();
+            services.AddScoped<IRepo<BrainTeaserWinner>, BrainTeaserWinnerRepo>();
             services.AddScoped<IArticleRepo, ArticleRepo>();
             services.AddScoped<IRepo<ArticleComment>, ArticleCommentRepo>();
             services.AddScoped<IArticleLikeRepo, ArticleLikeRepo > ();
