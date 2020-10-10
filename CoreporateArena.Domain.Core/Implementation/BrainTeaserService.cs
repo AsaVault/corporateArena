@@ -53,9 +53,9 @@ namespace CorporateArena.Domain
         {
             var bt = await _repo.getAsync(ID);
 
-            //var answers = await _bRepo.getAllByIDAsync(ID);
+            var answers = await _bRepo.getAllByIDAsync(ID);
             var winners = await _wRepo.getAllByIDAsync(ID);
-            //bt.BrainTeaserAnswers = answers;
+            bt.BrainTeaserAnswers = answers;
 
             bt.BrainTeaserWinners = winners;
 
