@@ -66,7 +66,7 @@ namespace CorporateArena.Infrastructure
         {
             try
             {
-                var bta = await _context.BrainTeaserAnswers.Where(x => x.BrainTeaserID == BrainTeaserID).ToListAsync();
+                var bta = await _context.BrainTeaserAnswers.Where(x => x.BrainTeaserID == BrainTeaserID).AsQueryable().ToListAsync();
                 return bta;
 
             }
