@@ -100,7 +100,8 @@ namespace CorporateArena.Infrastructure
                     DateCreated = DateTime.Now,
                     Answer = data.Answer,
                     BrainTeaserID = data.BrainTeaserID,
-                    UserCreated = data.UserCreated
+                    UserCreated = data.UserCreated,
+                    UserName = data.UserName
                 };
 
                 await _context.BrainTeaserAnswers.AddAsync(bt);
@@ -135,6 +136,7 @@ namespace CorporateArena.Infrastructure
                 {
                     DateCreated = data.DateCreated,
                     UserCreated = data.UserCreated,
+                    UserName = data.UserName,
                     Answer = data.Answer,
                     isDisplayed = true,
                     BrainTeaserID = data.BrainTeaserID

@@ -99,6 +99,7 @@ namespace CorporateArena.Infrastructure.Core.Repository
                     Answer = data.Answer,
                     BrainTeaserID = data.BrainTeaserID,
                     UserCreated = data.UserCreated,
+                    UserName = data.UserName,
                     isDisplayed = true
                 };
 

@@ -26,6 +26,7 @@ namespace CorporateArena.Domain
         public int ID { get; set; }
         public DateTime DateCreated { get; set; }
         public int UserCreated { get; set; }
+        public string UserName { get; set; }
         public string Answer { get; set; }
         public bool isApproved { get; set; }
         public int BrainTeaserID { get; set; }
@@ -36,6 +37,7 @@ namespace CorporateArena.Domain
         public int ID { get; set; }
         public DateTime DateCreated { get; set; }
         public int UserCreated { get; set; }
+        public string UserName { get; set; }
         public string Answer { get; set; }
         public bool isDisplayed { get; set; }
         public int BrainTeaserID { get; set; }
