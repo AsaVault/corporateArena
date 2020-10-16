@@ -1,25 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using CorporateArena.Domain;
 using CorporateArena.Infrastructure;
 using CorporateArena.Infrastructure.Core.Repository;
 using CorporateArena.Presentation;
-using CorporateArena.Presentation.Core.SetupFiles;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 
 namespace CorporateArena
 {
@@ -41,37 +33,37 @@ namespace CorporateArena
 
             services.AddControllers();
             services.AddCors();
-            services.AddSwaggerGen(opt =>
-            {
-                opt.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-                {
-                    Title = "Test Api",
-                    Version = "v1"
-                });
+            //services.AddSwaggerGen(opt =>
+            //{
+            //    opt.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+            //    {
+            //        Title = "Test Api",
+            //        Version = "v1"
+            //    });
 
-                //First we define the security scheme
-                opt.AddSecurityDefinition("Bearer", //Name the security scheme
-                    new OpenApiSecurityScheme
-                    {
-                        Description = "JWT Authorization header using the Bearer scheme.",
-                        Type = SecuritySchemeType.Http, //We set the scheme type to http since we're using bearer authentication
-                        Scheme = "bearer" //The name of the HTTP Authorization scheme to be used in the Authorization header. In this case "bearer".
-                    });
+            //    //First we define the security scheme
+            //    opt.AddSecurityDefinition("Bearer", //Name the security scheme
+            //        new OpenApiSecurityScheme
+            //        {
+            //            Description = "JWT Authorization header using the Bearer scheme.",
+            //            Type = SecuritySchemeType.Http, //We set the scheme type to http since we're using bearer authentication
+            //            Scheme = "bearer" //The name of the HTTP Authorization scheme to be used in the Authorization header. In this case "bearer".
+            //        });
 
-                //opt.AddSecurityRequirement(new OpenApiSecurityRequirement{
-                //     {
-                //        new OpenApiSecurityScheme{
-                //            Reference = new OpenApiReference{
-                //            Id = "Bearer", //The name of the previously defined security scheme.
-                //            Type = ReferenceType.SecurityScheme
-                //            }
-                //        },new List<string>()
-                //    }
-                //});
+            //    //opt.AddSecurityRequirement(new OpenApiSecurityRequirement{
+            //    //     {
+            //    //        new OpenApiSecurityScheme{
+            //    //            Reference = new OpenApiReference{
+            //    //            Id = "Bearer", //The name of the previously defined security scheme.
+            //    //            Type = ReferenceType.SecurityScheme
+            //    //            }
+            //    //        },new List<string>()
+            //    //    }
+            //    //});
 
-                opt.OperationFilter<AuthResponsesOperationFilter>();
+            //    opt.OperationFilter<AuthResponsesOperationFilter>();
 
-            });
+            //});
                 //   services.Add
             //    services.AddSwaggerGen(opt =>
             //{
@@ -114,9 +106,6 @@ namespace CorporateArena
                     ValidateIssuerSigningKey=true
                 };
             });
-
-
-
             
             services.AddDbContext<TContext>(opt => {
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("CorporateArena.Presentation.Core"));
@@ -139,8 +128,6 @@ namespace CorporateArena
             services.AddScoped<IRepo<Contact>, ContactRepo>();
             services.AddScoped<IUserRoleRepo, UserRoleRepo>();
             
-
-
             services.AddTransient<IEmailSender>(a => new EmailSender(SendgridKey));
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IUserService, UserService>();
@@ -149,6 +136,11 @@ namespace CorporateArena
             services.AddTransient<ITrafficUpdateService, TrafficUpdateService>();
             services.AddTransient<IVacancyService, VacancyService>();
             services.AddTransient<IPrivilegeService, PrivilegeService>();
+
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist/corporate-arenas";
+            });
 
         }
 
@@ -179,16 +171,37 @@ namespace CorporateArena
                 endpoints.MapControllers();
             });
 
-            var swaggerOpt = new SwaggerOpt();
-            Configuration.GetSection(nameof(SwaggerOpt)).Bind(swaggerOpt);
-            app.UseSwagger(opt => {
-                opt.RouteTemplate = swaggerOpt.JsonRoute;
-            });
-            app.UseSwaggerUI(opt => {
-                opt.SwaggerEndpoint(swaggerOpt.UIEndPoint, swaggerOpt.Description);
-            });
+            //var swaggerOpt = new SwaggerOpt();
+            //Configuration.GetSection(nameof(SwaggerOpt)).Bind(swaggerOpt);
+            //app.UseSwagger(opt => {
+            //    opt.RouteTemplate = swaggerOpt.JsonRoute;
+            //});
+            //app.UseSwaggerUI(opt => {
+            //    opt.SwaggerEndpoint(swaggerOpt.UIEndPoint, swaggerOpt.Description);
+            //});
 
             app.UseHttpsRedirection();
+
+            //app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            if (!env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
+
+
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+                spa.Options.SourcePath = "ClientApp";
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:44369");
+                }
+            });
         }
     }
 }
